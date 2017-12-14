@@ -34,6 +34,12 @@ if s <= 1
     return
 end
 
+%Check of tol gegeven is.
+
+if nargin == 2
+    tol = 10^(-6);
+end
+
 % Initialiseer de startwaarden.
 
 vorigeX = start;

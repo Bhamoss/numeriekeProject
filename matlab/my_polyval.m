@@ -21,7 +21,6 @@ function y = my_polyval( p, x, m)
 %
 
 
-%BIJKOMENDE OPDRACHT, GEBRUIK ZO WEINIG MOGELIJK GEHEUGEN
 
 
 graadStartPlusEen = size( p );

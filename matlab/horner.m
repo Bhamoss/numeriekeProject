@@ -19,12 +19,11 @@ function q = horner( p, x)
 %       eerste element enzovoort.
 %
 
-%INDIEN X COMPLEX IS MOET JE ZIJN COMPLEX TOEGEVOEGDE OOK VERWIJDEREN.
 
 % Initialiseer q.
 grootteP = size(p);
 grootteP = grootteP(2);
-q = zeros( (grootteP - 1), 1);
+q = zeros(1, (grootteP - 1));
 
 %Stop als p te klein is.
 
@@ -63,7 +62,7 @@ if not( isreal(x) )
     
     % q nog een graad lager initialiseren.
     
-    q = zeros( grootteP - 2, 1);
+    q = zeros( 1, grootteP - 2);
     
     % Coefficienten van de hoogste graad termen van p en q zijn gelijk.
     
