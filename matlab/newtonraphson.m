@@ -24,7 +24,55 @@ function w = newtonraphson( p, start, tol)
 %
 %
 
-%BOUW BEVEILIGING ONEIDNIGE LUS: AKA MAX AANTAL ITERATIES
+
+% p mag geen 0de graads zijn.
+s = size(p);
+s = s(2);
+if s <= 1
+    disp("Functie moet minstens graad 1 zijn!");
+    w = NaN;
+    return
+end
+
+% Initialiseer de startwaarden.
+
+vorigeX = start;
+huidigeX = start;
+
+% De fout benadering initialiseren zodat deze in de while geraakt.
+
+foutAprox = tol + 1;
+
+iterator = 0;
+while foutAprox > tol && iterator < 10000
+    
+    vorigeX = huidigeX;
+    
+    % Bereken p(vorigeX).
+    
+    px = my_polyval( p, vorigeX, 0);
+    
+    % Bereken p'(vorigeX).
+    
+    afgpx = my_polyval( p, vorigeX, 1);
+    afgpx = afgpx(2);
+    
+    % Bereken de huidigeX
+    
+    huidigeX = vorigeX - (px/afgpx);
+    
+    
+    foutAprox = abs(huidigeX - vorigeX);
+    iterator = iterator + 1;
+end
+
+% Checken of de fout benadering kleiner is dan tol.
+if abs(huidigeX - vorigeX) > tol
+    w = NaN;
+    return
+end
+
+w = huidigeX;
 
 end
 
