@@ -21,5 +21,64 @@ function q = horner( p, x)
 
 %INDIEN X COMPLEX IS MOET JE ZIJN COMPLEX TOEGEVOEGDE OOK VERWIJDEREN.
 
+% Initialiseer q.
+grootteP = size(p);
+grootteP = grootteP(2);
+q = zeros( (grootteP - 1), 1);
+
+%Stop als p te klein is.
+
+if grootteP <= 1
+   disp("Graad p is te laag!"); 
+   q = NaN;
+   return
+end
+
+if grootteP <= 2 && not( isreal(x) )
+   disp("Graad p is te laag voor een complex getal!"); 
+   q = NaN;
+   return
+end
+
+% Coefficienten van de hoogste graad termen van p en q zijn gelijk.
+
+q(1) = p(1);
+
+% Start en eindwaarde for loop elk 1 hoger voor gemak in matlab (rest niet 
+% nodig).
+for coefficient = 2:(grootteP - 1)
+
+   q(coefficient) = p(coefficient) + q(coefficient - 1)*x;
+    
+end
+
+
+
+% Complex toegevoegde ook wegdelen indien x complex is.
+if not( isreal(x) )
+
+    % Kopieer q om verder te kunnen werken ermee.
+    
+    a = q;
+    
+    % q nog een graad lager initialiseren.
+    
+    q = zeros( grootteP - 2, 1);
+    
+    % Coefficienten van de hoogste graad termen van p en q zijn gelijk.
+    
+    q(1) = a(1);
+    
+    % Start en eindwaarde for loop elk 1 hoger voor gemak in matlab (rest niet 
+    % nodig).
+    for coefficient = 2:(grootteP - 2)
+
+      q(coefficient) = a(coefficient) + a(coefficient - 1)*x;
+    
+    end
+    
+end
+
+
 end
 

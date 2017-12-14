@@ -25,6 +25,8 @@ function ws = newtonraphsondef( p, start, tol)
 %ZORG DAT JE ALLES VIND, DOE DIT DOOR NIEUWE STARTWAARDEN TE DOEN INGEVEN
 %INDIEN NIET ALLES WERD GEVONDEN, DOE DIT ZOALS AANGEGEVEN IN DE OPGAVE
 
+%zeg dat ze desnoods een complexe startwaarde moeten geven,
+%want enkel zo kun je complexe nulpunten vinden.
 
 end
 
