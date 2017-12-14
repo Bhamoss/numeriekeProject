@@ -23,5 +23,31 @@ function y = my_polyval( p, x, m)
 
 %BIJKOMENDE OPDRACHT, GEBRUIK ZO WEINIG MOGELIJK GEHEUGEN
 
+
+graadStartPlusEen = size( p );
+graadStartPlusEen = graadStartPlusEen(2);
+
+y = zeros( m, 1);
+
+% p gebruiken, want minder geheugen gebruikt (call by value)
+
+for afgeleide = 1:m
+    
+    % 1ste niet kopieren want die zit al in p.
+    
+    for coefficient = 2:(graadStartPlusEen - afgeleide + 1)
+        
+        %De coefficienten aanpassen. Alle ellementen van p voor 
+        %p(coefficient) zijn al aangepast, dus de 2de term
+        %in onderstaande formule ook.
+        
+        p(coefficient) = p(coefficient) + p(coefficient - 1)*x;
+        
+    end
+    
+    %De functiewaarde in x van deze afgeleide berekenen en opslaan.
+    y(afgeleide) = factorial(afgeleide - 1) * p(graadStartPlusEen - afgeleide + 1);
+    
+end
 end
 
