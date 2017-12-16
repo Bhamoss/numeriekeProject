@@ -1,4 +1,4 @@
-function ws = quadroots( p, tol)
+function ws = quadroots( p)
 %quadroots Berekent de nulpunten van de 2de graads functie met de gekende
 %formules en gebruikt deze als startwaarden voor newton rhapson om het
 %nulpunt naar de gewenste tolerantie te brengen.
@@ -10,37 +10,64 @@ function ws = quadroots( p, tol)
 %       zijn coefficienten als vector, met de hoogste graad term als eerste
 %       element enzovoort.
 %
-%   @param tol
-%       De tolerantie van de fout, indien niet meegegeven 10^-6.
 %
 %   @return ws
 %       De 2 nulpunten van de p.
 
 
-if nargin == 1
-    tol = 10^(-6);
-end
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+% ALS JE HIER EEN PARAMETER BIJ WIL GEVEN KUN JE DE WAARDE
+% VOOR STABILITEITSVERHOGER DOEN KIEZEN, GROTER VOOR KLEINE A
+% EN KLEINER ALS DE VERWACHTE NULPUNTEN KLEIN ZULLEN ZIJN
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-%Er wordt niet veel rekening gehouden met conditie en stabiliteit hier
-%omdat er toch nr achter volgt.
-% Anders zou een kleine a en gelijke termen bij het aftrekken voor slechte
-%stabiliteit zorgen.
+% Indien a klein is, wordt de noemer en teller met 100 vermenigvuldigt voor
+% een verbetering in de stabiliteit
 
-%ALS A KLEIN IS, VERMENIGVULDIG DAN DE TELLER EN NOEMER MET 100 OFZO
 
-xEen = ( -p(2) + sqrt(p(2)^2 - 4*p(1)*p(3)) ) / 2 * p(1) ;
-xEen = newtonraphson( p, xEen, tol);
-
-if isnan(xEen)
-    xEen = ( -p(2) + sqrt(p(2)^2 - 4*p(1)*p(3)) ) / 2 * p(1) ;
-end
-
-if xEen > 1
-    xTwee = p(3) / ( p(1) * xEen );
+if p(1) < 1
+    
+    % 128 is 2^7, die normaal goed is voor de stabiliteit, want dit is
+    % de basis voor floats volgens de IEEE standaard, dus zorgt dit voor
+    % zo min mogelijk nauwkeurigheidsverlies.
+    
+    stabiliteitsVerhoger = 128;
 else
-    xTwee = ( -p(2) - sqrt(p(2)^2 - 4*p(1)*p(3)) ) / 2 * p(1) ;
+    stabiliteitsVerhoger = 1;
 end
-xTwee = newtonraphson( p, xTwee, tol);
+
+xEen = ( -p(2) + sqrt(p(2)^2 - 4*p(1)*p(3)) ) / ( 2 * p(1) * stabiliteitsVerhoger );
+
+% Teller nu verhogen, niet ervoor want dan wordt teller groter voor er 
+% gedeeld wordt, wat een slechtere stabiliteit geeft.
+
+xEen = xEen * stabiliteitsVerhoger;
+
+
+% Volgens de stabiele methode berekenen als xEen niet te dicht van 0 ligt,
+% anders de gewone formule toepassen.
+
+if xEen > 0.0000000005
+    
+    % Opnieuw eerst de stabiliteitsVerhoger aanpassen
+    
+    if xEen < 1
+       stabiliteitsVerhoger = 128;
+    else
+       stabiliteitsVerhoger = 1;
+    end
+    
+    xTwee = p(3) / ( p(1) * xEen * stabiliteitsVerhoger);
+    xTwee = xTwee * stabiliteitsVerhoger;
+    
+else
+    
+    % stabiliteitsVerhoger heeft hier al de juiste waarde
+    
+    xTwee = ( -p(2) - sqrt(p(2)^2 - 4*p(1)*p(3)) ) / ( 2 * p(1) * stabiliteitsVerhoger );
+    xTwee = xTwee * stabiliteitsVerhoger;
+    
+end
 
 
 
