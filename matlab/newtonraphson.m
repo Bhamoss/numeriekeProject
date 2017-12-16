@@ -63,9 +63,27 @@ while foutAprox > tol && iterator < 10000
     afgpx = my_polyval( p, vorigeX, 1);
     afgpx = afgpx(2);
     
+    % Stabiliteit beschermen tegen een kleine afgeleide.
+    
+    if afgpx < 1
+        
+        stabV = 100;
+        
+    else
+        
+        stabV = 1;
+        
+    end
+    
+    
+    % px gedeeld door afgpx
+    
+    deling = px / ( afgpx * stabV );
+    deling = deling * stabV;
+    
     % Bereken de huidigeX
     
-    huidigeX = vorigeX - (px/afgpx);
+    huidigeX = vorigeX - deling;
     
     
     foutAprox = abs(huidigeX - vorigeX);
