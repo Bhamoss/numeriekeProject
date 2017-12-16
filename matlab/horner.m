@@ -8,7 +8,7 @@ function q = horner( p, x)
 %   @param p
 %       De veelterm die de deflatie ondergaat, voorgesteld door zijn
 %       coefficienten als vector, met de hoogste graad term als eerste
-%       element enzovoort.
+%       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param x
 %       Het nulpunt die zal weggedeeld worden in p.
@@ -16,7 +16,7 @@ function q = horner( p, x)
 %   @result q
 %       De veelterm die het resultaat is van de deflatie van p, voorgesteld
 %       door zijn coefficienten als vector, met de hoogste graad term als 
-%       eerste element enzovoort.
+%       eerste element enzovoort. Dit is een 1 x n vector.
 %
 
 

@@ -7,7 +7,7 @@ function y = my_polyval( p, x, m)
 %   @param p
 %       De veelterm die geevalueerd zal worden, voorgesteld door zijn
 %       coefficienten als vector, met de hoogste graad term als eerste
-%       element enzovoort.
+%       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param x
 %       Het punt waarin de functies zullen geevalueerd worden.

@@ -8,13 +8,13 @@ function w = newtonraphson( p, start, tol)
 %   @param p
 %       De veelterm die geevalueerd zal worden, voorgesteld door zijn
 %       coefficienten als vector, met de hoogste graad term als eerste
-%       element enzovoort.
+%       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param start
 %       De startwaarde nodig om Newton-Raphson aan te vatten.
 %
 %   @param tol
-%       De tolerantie van de fout, indien niet meegegeven 10^-6
+%       De tolerantie van de fout, indien niet meegegeven 10^-6.
 %
 %   @return w
 %       Het nulpunt gevonden aan de hand van de starwaarde binnen de
