@@ -71,10 +71,10 @@ if not( isreal(x) )
     q(1) = a(1);
     
     % Start en eindwaarde for loop elk 1 hoger voor gemak in matlab (rest niet 
-    % nodig).
+    % nodig).;
     for coefficient = 2:(grootteP - 2)
 
-      q(coefficient) = a(coefficient) + a(coefficient - 1)*x;
+      q(coefficient) = a(coefficient) + q(coefficient - 1)*x;
     
     end
     

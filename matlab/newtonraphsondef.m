@@ -67,7 +67,6 @@ while nbGevondenNulpunten ~= grootteP - 1
     huidigNulpunt = newtonraphson( p, start, tol); 
     
     if ~isnan(huidigNulpunt)
-        
         %Nulpunt gevonden binnen de tolerantie:
         %Deel nulpunt weg en voeg nulpunt toe aan ws
         
@@ -75,6 +74,7 @@ while nbGevondenNulpunten ~= grootteP - 1
         
         
         p = horner( p, huidigNulpunt);
+        
         
         ws(nbGevondenNulpunten) = huidigNulpunt;
         
@@ -87,7 +87,7 @@ while nbGevondenNulpunten ~= grootteP - 1
         end
         
     else
-        % Geen nulpunt gevonden, laat nieuwe startwaarde
+        % Geen nulpunt gevonden, laad nieuwe startwaarde
         
         % Maak arrays om te plotten.
         
