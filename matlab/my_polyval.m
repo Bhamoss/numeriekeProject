@@ -49,7 +49,7 @@ for afgeleide = 1:m+1
     %De functiewaarde in x van deze afgeleide berekenen en opslaan.
     %y begint bij 1 en eindigt bij m + 1, dus 1 verder zetten.
     
-    y(afgeleide) = factorial(afgeleide) * p(graadStartPlusEen - afgeleide+1);
+    y(afgeleide) = factorial(afgeleide-1) * p(graadStartPlusEen - afgeleide+1);
     
     
     
