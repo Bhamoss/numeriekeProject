@@ -26,24 +26,17 @@ function y = my_polyval( p, x, m)
 graadStartPlusEen = size( p );
 graadStartPlusEen = graadStartPlusEen(2);
 
-% Kijk of er niet teveel afgeleid wordt.
-if graadStartPlusEen <= m
-    disp("m is groter of gelijk aan de graad van de veelterm + 1");
-    y = NaN;
-    return
-end
-
 
 y = zeros( m + 1, 1);
 
 % p gebruiken, want minder geheugen gebruikt (call by value)
 
 
-for afgeleide = 0:m
+for afgeleide = 1:m+1
     
     % 1ste niet kopieren want die zit al in p.
     
-    for coefficient = 2:(graadStartPlusEen - afgeleide)
+    for coefficient = 2:(graadStartPlusEen - afgeleide+1)
         
         %De coefficienten aanpassen. Alle ellementen van p voor 
         %p(coefficient) zijn al aangepast, dus de 2de term
@@ -56,7 +49,7 @@ for afgeleide = 0:m
     %De functiewaarde in x van deze afgeleide berekenen en opslaan.
     %y begint bij 1 en eindigt bij m + 1, dus 1 verder zetten.
     
-    y(afgeleide + 1) = factorial(afgeleide) * p(graadStartPlusEen - afgeleide);
+    y(afgeleide) = factorial(afgeleide) * p(graadStartPlusEen - afgeleide+1);
     
     
     

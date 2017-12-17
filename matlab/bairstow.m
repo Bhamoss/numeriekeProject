@@ -31,7 +31,7 @@ grootteP = grootteP(2);
 
 if grootteP < 4
    
-    disp("De meegegeven veelterm moet minstens van graad 2 zijn.");
+    disp("De meegegeven veelterm moet minstens van graad 3 zijn.");
     ws = NaN;
     return
     
