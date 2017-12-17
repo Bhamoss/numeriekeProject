@@ -73,9 +73,18 @@ while nbGevondenNulpunten ~= grootteP - 1
         
         nbGevondenNulpunten = nbGevondenNulpunten + 1 ;
         
+        
         p = horner( p, huidigNulpunt);
         
         ws(nbGevondenNulpunten) = huidigNulpunt;
+        
+        %Indien het nulpunt complex is werd zijn toegevoegde ook
+        %weggedeelt:
+        
+        if not( isreal(huidigNulpunt) )
+            nbGevondenNulpunten = nbGevondenNulpunten + 1 ;
+            ws(nbGevondenNulpunten) = conj(huidigNulpunt);
+        end
         
     else
         % Geen nulpunt gevonden, laat nieuwe startwaarde

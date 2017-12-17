@@ -56,6 +56,8 @@ end
 % Complex toegevoegde ook wegdelen indien x complex is.
 if not( isreal(x) )
 
+    x = conj( x );
+    
     % Kopieer q om verder te kunnen werken ermee.
     
     a = q;

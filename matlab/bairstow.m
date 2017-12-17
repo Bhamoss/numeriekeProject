@@ -29,7 +29,7 @@ grootteP = grootteP(2);
 
 % Kijken of p minstens 3de graads is.
 
-if grootteP < 3
+if grootteP < 4
    
     disp("De meegegeven veelterm moet minstens van graad 2 zijn.");
     ws = NaN;
@@ -118,7 +118,7 @@ while fout > tol && iterator < 10000
     iterator = iterator + 1;
 end
 
-ws = [ start(1) start(2) ];
+ws = quadroots( [1 start(1) start(2)] );
 
 end
 
