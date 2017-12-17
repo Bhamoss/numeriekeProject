@@ -4,9 +4,9 @@ function convplotnr(p, x0, a, b, tol)
     %   welk nulpunt convergeren.
     %
     % Inputs
-    %   p   : Vector met de coï¿½fficiï¿½nten van de veelterm
+    %   p   : Vector met de coëfficiënten van de veelterm
     %   x0  : Een startwaarde voor het vinden van alle nulpunten
-    %   a   : Een vector met alle waardes voor het reï¿½le deel van de
+    %   a   : Een vector met alle waardes voor het reële deel van de
     %           startwaarde die gebruikt moeten worden
     %   b   : Een vector met alle waardes voor het imaginaire deel van de
     %           startwaarde die gebruikt moeten worden
