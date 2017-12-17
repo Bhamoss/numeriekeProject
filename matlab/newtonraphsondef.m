@@ -47,7 +47,7 @@ end
 
 % Initialiseer ws.
 
-ws = zeros( grootteP - 1, 1);
+ws = zeros( 1, grootteP - 1);
 
 % Maak de arrays aan om te plotten indien geen nulpunt gevonden word.
 plotGrootte = 5000;

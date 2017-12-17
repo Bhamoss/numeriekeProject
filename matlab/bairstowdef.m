@@ -20,6 +20,8 @@ function ws = bairstowdef( p, start, tol)
 %
 
 
+% Bairstow tot graad kleiner is dan drie, dan quadroots of gewoon lineair
+
 
 end
 
