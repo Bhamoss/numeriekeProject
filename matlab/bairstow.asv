@@ -76,15 +76,15 @@ while fout > tol && iterator < 10000
     
     % b1 en b0 opslaan
     
-    werkVector2(1) = werkVector( 1) -start(1);
-    werkVector2(2) = werkVector( 2) - werkVector2(1)*start(1)-start(2);
+    werk = werkVector( 1) -start(1);
+    b0 = werkVector( 2) - b1*start(2);
     
 
     % Partiele afgeleiden berekenen.
     
     % De eerste twee speciale gevallen doen
     
-    %werkVector(2) = werkVector2(1) + werkVector2(2) * start(1);
+    werkVector(2) = werkVector(1) + werkVector(2) * start(1);
 
     % De tweede keer dubbelrijig horner 
 
@@ -92,14 +92,14 @@ while fout > tol && iterator < 10000
     
       %Dubbelrijig horner
     
-       werkVector2(graad) = werkVector(graad) - werkVector2(graad - 1) * start(1) - werkVector2(graad - 2) * start(2);
+       werkVector(graad) = werkVector(graad) + werkVector(graad - 1) * start(1) + werkVector(graad - 2) * start(2);
     
     end
     
     
     % Het 2 x 2 stelsel oplossen om delta p en delta u te vinden
     
-    opl = linsolve( [ werkVector(grootteP - 2) , werkVector(grootteP - 3) ; werkVector(grootteP - 1) , werkVector(grootteP - 2) ], [ -werkVector2(1) ; -werkVector2(2) ]);
+    opl = linsolve( [ werkVector(grootteP - 2) , werkVector(grootteP - 3) ; werkVector(grootteP - 1) , werkVector(grootteP - 2) ], [ -b1 ; -b0 ]);
     
     pVorig = start(1);
     uVorig = start(2);

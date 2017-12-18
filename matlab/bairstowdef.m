@@ -21,7 +21,119 @@ function ws = bairstowdef( p, start, tol)
 
 
 % Bairstow tot graad kleiner is dan drie, dan quadroots of gewoon lineair
+%ZORG DAT JE ALLES VIND, DOE DIT DOOR NIEUWE STARTWAARDEN TE DOEN INGEVEN
+%INDIEN NIET ALLES WERD GEVONDEN, DOE DIT ZOALS AANGEGEVEN IN DE OPGAVE
 
+%zeg dat ze desnoods een complexe startwaarde moeten geven,
+%want enkel zo kun je complexe nulpunten vinden.
+
+
+% p mag geen 0de graads zijn.
+
+grootteP = size(p);
+grootteP = grootteP(2);
+if grootteP <= 3
+    disp("Functie moet minstens graad 3 zijn!");
+    ws = NaN;
+    return
+end
+
+% Check of tol gegeven is.
+
+if nargin == 2
+    tol = 10^(-6);
+end
+
+% Initialiseer ws.
+
+ws = zeros( 1, grootteP - 1);
+
+% Maak de arrays aan om te plotten indien geen nulpunt gevonden word.
+plotGrootte = 5000;
+startPlot = -500;
+eindPlot = 500;
+X = zeros( plotGrootte, 1);
+Y = zeros( plotGrootte, 1);
+stapGrootte = (abs(startPlot) + abs(eindPlot)) / plotGrootte;
+
+% Itereer aan de hand van het aantal gevonden nulpunten.
+
+nbGevondenNulpunten = 0;
+
+while nbGevondenNulpunten ~= grootteP - 1
+
+    
+    huidigNulpunt = newtonraphson( p, start, tol); 
+    
+    if ~isnan(huidigNulpunt)
+        %Nulpunt gevonden binnen de tolerantie:
+        %Deel nulpunt weg en voeg nulpunt toe aan ws
+        
+        nbGevondenNulpunten = nbGevondenNulpunten + 1 ;
+        
+        
+        p = horner( p, huidigNulpunt);
+        
+        
+        ws(nbGevondenNulpunten) = huidigNulpunt;
+        
+        %Indien het nulpunt complex is werd zijn toegevoegde ook
+        %weggedeelt:
+        
+        if not( isreal(huidigNulpunt) )
+            nbGevondenNulpunten = nbGevondenNulpunten + 1 ;
+            ws(nbGevondenNulpunten) = conj(huidigNulpunt);
+        end
+        
+    else
+        % Geen nulpunt gevonden, laad nieuwe startwaarde
+        
+        % Maak arrays om te plotten.
+        
+        xWaarde = startPlot;
+        
+        huidigeGrootteP = size(p);
+        huidigeGrootteP = huidigeGrootteP(2);
+        
+        % Bereken alle koppels om te plotten.
+        for i = 1:plotGrootte
+            
+            yWaarde = 0;
+            exponent = 0;
+            
+            % Bereken de y waarde.
+            % Begin achteraan de lijst, dus met de constante.
+            for j = huidigeGrootteP:-1:1
+               
+                yWaarde = yWaarde + p(j) * xWaarde^(exponent);
+                
+                exponent = exponent + 1;
+                
+            end
+            
+            X(i) = xWaarde;
+            Y(i) = yWaarde;
+            
+            xWaarde = xWaarde + stapGrootte;
+        end
+        
+        % Plot de functie.
+        
+        plot(X,Y);
+        
+        % Vraag om juiste input
+        
+        input_hf = str2double(input('Geen nulpunt gevonden, geef nieuwe (misschien complexe) startwaarde: ','s'));
+        while isnan(input_hf) || fix(input_hf) ~= input_hf
+            input_hf = str2double(input('Geef een getal in: ','s'));
+        end
+        
+        start = input_hf;
+        
+    end
+    
+    
+end
 
 end
 
