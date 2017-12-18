@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.10.15)  18 DEC 2017 17:32
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2017.10.15)  18 DEC 2017 20:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1006,13 +1006,13 @@ Package lastpage Info: Please have a look at the pageslts package at
 ABD: EveryShipout initializing macros
 \c@lstlisting=\count143
 
-<kulakLogo.png, id=55, 245.718pt x 56.8524pt>
+<kulakLogo.png, id=79, 245.718pt x 56.8524pt>
 File: kulakLogo.png Graphic file (type png)
  <use kulakLogo.png>
 Package pdftex.def Info: kulakLogo.png used on input line 53.
 (pdftex.def)             Requested size: 184.46051pt x 42.67912pt.
 
-<kuleuvenSedes.pdf, id=57, 349.305pt x 596.2275pt>
+<kuleuvenSedes.pdf, id=81, 349.305pt x 596.2275pt>
 File: kuleuvenSedes.pdf Graphic file (type pdf)
  <use kuleuvenSedes.pdf>
 Package pdftex.def Info: kuleuvenSedes.pdf used on input line 53.
@@ -1031,22 +1031,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--54
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--66
+Underfull \hbox (badness 10000) in paragraph at lines 65--67
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--66
+Underfull \hbox (badness 10000) in paragraph at lines 65--67
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--70
+Underfull \hbox (badness 10000) in paragraph at lines 70--71
 
  []
 
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 71.
+nput line 72.
 (../matlab/my_polyval.m [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} </home/b/texmf/tex/latex/ku
@@ -1058,17 +1058,17 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 45.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 73--79
+Underfull \hbox (badness 10000) in paragraph at lines 74--80
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--79
+Underfull \hbox (badness 10000) in paragraph at lines 74--80
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 73--79
+Underfull \hbox (badness 10000) in paragraph at lines 74--80
 
  []
 
@@ -1084,45 +1084,109 @@ Package Fancyhdr Warning: \headheight is too small (42.67912pt):
  This may cause the page layout to be inconsistent, however.
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 90--94
+Underfull \hbox (badness 10000) in paragraph at lines 91--95
 
  []
 
 (../matlab/newtonraphson.m
 File: kuleuvenSedes.pdf Graphic file (type pdf)
  <use kuleuvenSedes.pdf>
-Package pdftex.def Info: kuleuvenSedes.pdf used on input line 39.
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 37.
 (pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
  [3]
 File: kuleuvenSedes.pdf Graphic file (type pdf)
  <use kuleuvenSedes.pdf>
-Package pdftex.def Info: kuleuvenSedes.pdf used on input line 92.
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 90.
 (pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
 
-[4]) (./verslag.bbl) 
+[4])
+Underfull \hbox (badness 10000) in paragraph at lines 99--101
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 115--118
+
+ []
+
+(../matlab/horner.m
+File: kuleuvenSedes.pdf Graphic file (type pdf)
+ <use kuleuvenSedes.pdf>
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 17.
+(pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
+ [5]
+File: kuleuvenSedes.pdf Graphic file (type pdf)
+ <use kuleuvenSedes.pdf>
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 71.
+(pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
+
+[6])
+Underfull \hbox (badness 10000) in paragraph at lines 120--123
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 133--140
+
+ []
+
+(../matlab/newtonraphsondef.m
+File: kuleuvenSedes.pdf Graphic file (type pdf)
+ <use kuleuvenSedes.pdf>
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 11.
+(pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
+ [7]
+File: kuleuvenSedes.pdf Graphic file (type pdf)
+
+<use kuleuvenSedes.pdf>
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 67.
+(pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
+ [8]
+File: kuleuvenSedes.pdf Graphic file (type pdf)
+ <use kuleuvenSedes.pdf>
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 121.
+(pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
+ [9])
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
+
+ []
+
+(./verslag.bbl) 
 AED: lastpage setting LastPage
 File: kuleuvenSedes.pdf Graphic file (type pdf)
 <use kuleuvenSedes.pdf>
-Package pdftex.def Info: kuleuvenSedes.pdf used on input line 107.
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 169.
 (pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
- [5]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 107.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 107.
+ [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 169.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 169.
  (./verslag.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 107.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 107.
-Package rerunfilecheck Info: File `verslag.out' has not changed.
-(rerunfilecheck)             Checksum: 55C22B0DAD90F397A6382B33A5EE0729;453.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 107.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 169.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 169.
+
+
+Package rerunfilecheck Warning: File `verslag.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `verslag.out':
+(rerunfilecheck)             Before: 1C3E19013FC752EFB84277DDEF82216E;868
+(rerunfilecheck)             After:  62794774D0AC4CA132A0871227404FCB;1084.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 169.
  ) 
 Here is how much of TeX's memory you used:
- 19867 strings out of 493013
- 369241 string characters out of 6135681
- 548182 words of memory out of 5000000
- 22896 multiletter control sequences out of 15000+600000
+ 20189 strings out of 493013
+ 373818 string characters out of 6135681
+ 582182 words of memory out of 5000000
+ 22971 multiletter control sequences out of 15000+600000
  12301 words of font info for 29 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,18n,80p,533b,2330s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,18n,80p,606b,2330s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/
@@ -1138,10 +1202,10 @@ ic/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0500
 mf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/publi
 c/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1000.
 pfb>
-Output written on verslag.pdf (5 pages, 410602 bytes).
+Output written on verslag.pdf (10 pages, 442405 bytes).
 PDF statistics:
- 355 PDF objects out of 1000 (max. 8388607)
- 309 compressed objects within 4 object streams
- 172 named destinations out of 1000 (max. 500000)
- 167 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 690 PDF objects out of 1000 (max. 8388607)
+ 636 compressed objects within 7 object streams
+ 413 named destinations out of 1000 (max. 500000)
+ 215 words of extra memory for PDF output out of 10000 (max. 10000000)
 

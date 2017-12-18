@@ -3,4 +3,14 @@
 \BOOKMARK [3][-]{subsubsection.1.1.1}{Implementatie}{subsection.1.1}% 3
 \BOOKMARK [3][-]{subsubsection.1.1.2}{Fouten}{subsection.1.1}% 4
 \BOOKMARK [2][-]{subsection.1.2}{Een nulpunt vinden met Newton-Raphson}{section.1}% 5
-\BOOKMARK [3][-]{subsubsection.1.2.1}{implementatie}{subsection.1.2}% 6
+\BOOKMARK [3][-]{subsubsection.1.2.1}{Implementatie}{subsection.1.2}% 6
+\BOOKMARK [3][-]{subsubsection.1.2.2}{Fouten}{subsection.1.2}% 7
+\BOOKMARK [2][-]{subsection.1.3}{Deflatie met Horner}{section.1}% 8
+\BOOKMARK [3][-]{subsubsection.1.3.1}{Implementatie}{subsection.1.3}% 9
+\BOOKMARK [3][-]{subsubsection.1.3.2}{Fouten}{subsection.1.3}% 10
+\BOOKMARK [2][-]{subsection.1.4}{Alle nulpunten vinden}{section.1}% 11
+\BOOKMARK [3][-]{subsubsection.1.4.1}{Implementatie}{subsection.1.4}% 12
+\BOOKMARK [3][-]{subsubsection.1.4.2}{Fouten}{subsection.1.4}% 13
+\BOOKMARK [1][-]{section.2}{Bairstow}{}% 14
+\BOOKMARK [1][-]{section.3}{Convplot}{}% 15
+\BOOKMARK [1][-]{section.4}{Newton-Raphson VS Bairstow}{}% 16

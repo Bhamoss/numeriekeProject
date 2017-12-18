@@ -55,13 +55,14 @@ Andries Vansweevelt
 \section*{Inleiding}
 
 Dit verslag behandeld de vragen en antwoorden gesteld in het eind-project numerieke wiskunde 2017. De hoofdvraag in dit project is hoe wortels/nulpunten van een willekeurige veelterm kunnen gevonden worden met de methode van Newton-Raphson en de methode van Bairstow. Verder behandelt dit verslag de performantie en fouten op beide algoritmen en  sluit af met deze met elkaar te vergelijken. Beide methoden werden geïmplementeerd in matlab en getest op 10 gegeven veeltermen, met complexe en reële nulpunten. 
-Verder werden verschillende opgedragen ease-of-use features geïmplementeerd, zoals een figuur plotten indien enkel de coëfficiënten gegeven.
+Verder werden verschillende opgedragen ease-of-use features geïmplementeerd, zoals een figuur plotten indien enkel de coëfficiënten gegeven.\\
+Ook word kort aandacht besteed aan een analyse van een bepaald geval, waarin bekeken wordt welke startwaarden voor beide methoden tot welke (of geen) nulpunten leiden.
 
 \section{Newton-Raphson}
 Dit hoofdstuk bespreekt de implementatie van Newton-Raphson, waarin onder andere de methode van Horner, samen met een analyse van de performantie en fouten.
 
 \subsection{Evaluatie veelterm en zijn afgeleide m.b.v. het Hornerschema}
-Hier wordt opdracht 1 besproken. \\~\\
+Hier wordt opdracht 1 besproken. \label{sec:horUit} \\~\\
 Met het uitgebreide Hornerschema, besproken in \cite{bultheel2006inleiding}, kan een veelterm geëvalueerd in een gegeven punt. Daarna kan met een deel van de oplossing verder gewerkt worden om 1-per-1 de afgeleiden van de veelterm te evalueren in hetzelfde punt.\\
 
 \subsubsection{Implementatie}
@@ -79,9 +80,9 @@ Dit wil zeggen dat het geheugengebruik van de functie van orde $\Theta( n + m )$
 
 \subsubsection{Fouten}
 
-De stabiliteit van deze methode komt op 3 manieren in gedrang:
+De stabiliteit van deze methode komt op 2 manieren in gedrang:
 \begin{itemize}
-	\item In lijn 45, als p(coefficient) en p(coefficient - 1)*x bijna even groot zijn.
+	\item In lijn 45, als p(coefficient) en p(coefficient - 1)*x bijna even groot zijn en tegengesteld teken hebben.
 	\item In lijn 52, als de `afgeleide' afgeleide zeer groot word, zullen afrondingsfouten groter worden door de faculteit.
 \end{itemize}
 
@@ -92,9 +93,70 @@ Hier wordt opdracht 2 besproken.
 Indien een willekeurig veelterm gegeven wordt en een startwaarde, kan via de formule van Newton-Raphson (
 $x_{i+1} = x_i + \frac{ p(x_i) }{ p^{'}(x_i) }$) een nieuwe x gevonden worden, die dichter bij het nulpunt ligt als er convergentie optreedt.
 
-\subsubsection{implementatie}
+\subsubsection{Implementatie}
 
 \lstinputlisting{../matlab/newtonraphson.m}
+~\\~\\
+Het iteratief berekenen van de volgende x, wordt gestopt op 2 manieren:
+\begin{enumerate}
+	\item Door de `zwakke' stopwaarde, als de nieuwe x en de vorige x in absolute waarde kleiner zijn dan de meegegeven tolerantie.\\
+	In dit geval wordt de functie aanroep als succesvol gezien.
+	\item Na 10000 iteraties wordt de lus verplicht afgebroken, om niet in een oneindige lus terecht te komen.
+\end{enumerate}
+
+Bij iedere iteratie wordt de `zwakke' fout opnieuw berekent en gecheckt of aan de voorwaarde voldaan wordt.
+Op het einde van het algoritme wordt nog een laatste check gedaan om te zien of er voldaan is aan de meegegeven tolerantie. Indien wel wordt de gevonden benadering van het nulpunt meegegeven, anders NaN.
+Er werd nog een extra geïmplementeerd om de stabiliteit te bevorderen die in de volgende sectie besproken wordt.
+
+\subsubsection{Fouten}
+De grootste fout wordt verkregen door een kleine $p^{'}(x_i)$ in de berekening van een nieuwe x, door de deling in lijn 77. Om hiermee om te gaan wordt indien $p^{'}(x_i)$ kleiner dan 1 wordt, in de deling een $p^{'}(x_i)$ vermenigvuldigt wordt met 100 om het verderzetten van de fout op $p^{'}(x_i)$ te verzachten. Hierna wordt de volledige quotiënt opnieuw vermenigvuldigt met 100. De 100 kan groter genomen worden, maar dan worden de afrondingsfouten voor een grote $p(x)_i$ ook groter.
+
+\subsection{Deflatie met Horner}
+Hier wordt opdracht 3 besproken.\\~\\
+Nadat een nulpunt met Newton-Raphson gevonden wordt, kan de (x - gevondenNulpunt) factor weggedeeld worden met het alom bekende schema van Horner. 
+Er moest ook voorzien worden dat als het gegeven nulpunt complex is, zijn complex toegevoegde ook weggedeeld wordt.
+\subsubsection{Implementatie}
+\lstinputlisting{../matlab/horner.m}
+~\\~\\
+De implementatie is gelijk aan die van sectie \ref{sec:horUit} met 1 iteratie, waarbij de eerste n-1 coëfficiënten worden teruggegeven na de iteratie. Dit stelt dus een veelterm van 1 graad lager dan p voor. Dit geld echter enkel als het nulpunt reëel is. 
+In dit geval word een veelterm die 2 graden lager is dan p teruggegeven, waaruit beide nulpunten op dezelfde manier zijn weggedeeld. Tijdens het wegdelen van het complex toegevoegde wordt dus met een input van 1 graad lager een output van 2 graden lager gegeven.
+
+\subsubsection{Fouten}
+
+De stabiliteit van deze methode lijd onder dezelfde problemen als \ref{sec:horUit}:
+\begin{itemize}
+	\item In lijn 50, als p(coefficient) en q(coefficient - 1)*x bijna even groot zijn en tegengesteld teken hebben.
+	\item In lijn 77, als a(coefficient) en q(coefficient - 1)*x bijna even groot zijn en tegengesteld teken hebben.
+\end{itemize}
+
+\subsection{Alle nulpunten vinden}
+Hier wordt opdracht 3 besproken.\\~\\
+Met de hiervoor besproken methoden werd zoals gevraagd een implementatie geschreven die alle nulpunten berekent van een gegeven veelterm. Deze methode vraagt om een veelterm, een startwaarde en een tolerantie die $10^{-6}$ is indien niet meegegeven. Er wordt een nulpunt bepaald met de methode van Newton-Raphson met de gegeven startwaarde, waarna dit nulpunt weggedeeld wordt met de methode van Horner. Er wordt met de nieuwe veelterm die door Horner werd teruggegeven verder gewerkt en er wordt opnieuw een nulpunt met Newton-Raphson bepaald met als startwaarde het vorige gevonden nulpunt.
+\\
+Dit wordt gedaan tot alle nulpunten van de veelterm gevonden worden.
+\\
+Als Newton-Raphson niet convergeert, en dus NaN wordt teruggegeven, wordt de huidige functie geplot en om een nieuw startpunt gevraagd aan de gebruiker.\\
+Uiteindelijk wordt een vector met alle nulpunten van p teruggegeven.
+
+\subsubsection{Implementatie}
+\lstinputlisting{../matlab/newtonraphsondef.m}
+~\\~\\
+
+\subsubsection{Fouten}
+Omdat deze functie op zich niet veel rekenwerk bevat, maar dit wordt doorgegeven aan de opgeroepen functie, kan hier niet veel over de fout gepraat worden.
+\\
+Bij het plotten van de functie zijn kleine fouten niet zo belangrijk, omdat dit op een grote schaal gebeurt en omdat een plot sowieso nooit als betrouwbaar mag gezien worden.
+
+\section{Bairstow}
+
+\section{Convplot}
+
+Bekijk welke punten niet tot convergentie leiden.
+Zoek ook patronen, en plaatsen waar precies willekeurig een nulpunt optreed.
+
+\section{Newton-Raphson VS Bairstow}
+
+Volgens die mail van Andries convergeert Bairstow altijd, dus das een groot voordeel maar kijk nog eens verder
 
 \section*{Besluit}
 
