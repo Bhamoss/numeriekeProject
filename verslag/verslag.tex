@@ -63,6 +63,9 @@ Dit hoofdstuk bespreekt de implementatie van Newton-Raphson, waarin onder andere
 \subsection{Evaluatie veelterm en zijn afgeleide m.b.v. het Hornerschema}
 Hier wordt opdracht 1 besproken. \\~\\
 Met het uitgebreide Hornerschema, besproken in \cite{bultheel2006inleiding}, kan een veelterm geëvalueerd in een gegeven punt. Daarna kan met een deel van de oplossing verder gewerkt worden om 1-per-1 de afgeleiden van de veelterm te evalueren in hetzelfde punt.\\
+
+\subsubsection{Implementatie}
+
 Dit werd als volgt geïmplementeerd:\\
 
 \lstinputlisting{../matlab/my_polyval.m}
@@ -73,6 +76,25 @@ Het 1'ste element van p, dus de coefficient van de hoogste graad term, wordt noo
 ~\\~\\Een bijkomende opdracht was om zo weinig mogelijk geheugen te gebruiken. Om hier mee om te gaan werd in de vector p zelf gewerkt. Dit is geen enkel probleem omdat je nooit de oude vorige elementen nodig hebt en omdat matlab call-by-value is. Dit wil zeggen dat matlab p kopieert en de kopie meegeeft aan de functie waar mee gewerkt mag worden zonder dat de originele p wordt aangepast. 
 Het enige geheugen dat extra wordt aangemaakt, is het geheugen gebruikt om de functie waarden terug te geven een de oproeper van de functie.
 Dit wil zeggen dat het geheugengebruik van de functie van orde $\Theta( n + m )$ is, met n de graad + 1 van p en m het aantal keer dat afgeleid moet worden.
+
+\subsubsection{Fouten}
+
+De stabiliteit van deze methode komt op 3 manieren in gedrang:
+\begin{itemize}
+	\item In lijn 45, als p(coefficient) en p(coefficient - 1)*x bijna even groot zijn.
+	\item In lijn 52, als de `afgeleide' afgeleide zeer groot word, zullen afrondingsfouten groter worden door de faculteit.
+\end{itemize}
+
+
+\subsection{Een nulpunt vinden met Newton-Raphson}
+Hier wordt opdracht 2 besproken.
+\\~\\
+Indien een willekeurig veelterm gegeven wordt en een startwaarde, kan via de formule van Newton-Raphson (
+$x_{i+1} = x_i + \frac{ p(x_i) }{ p^{'}(x_i) }$) een nieuwe x gevonden worden, die dichter bij het nulpunt ligt als er convergentie optreedt.
+
+\subsubsection{implementatie}
+
+\lstinputlisting{../matlab/newtonraphson.m}
 
 \section*{Besluit}
 

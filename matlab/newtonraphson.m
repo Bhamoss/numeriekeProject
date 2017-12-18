@@ -54,14 +54,10 @@ while foutAprox > tol && iterator < 10000
     
     vorigeX = huidigeX;
     
-    % Bereken p(vorigeX).
+    % Bereken p(vorigeX) en p'(vorigeX).
     
-    px = my_polyval( p, vorigeX, 0);
-    
-    % Bereken p'(vorigeX).
-    
-    afgpx = my_polyval( p, vorigeX, 1);
-    afgpx = afgpx(2);
+    [ px, afgpx] = my_polyval( p, vorigeX, 1);
+ 
     
     % Stabiliteit beschermen tegen een kleine afgeleide.
     
