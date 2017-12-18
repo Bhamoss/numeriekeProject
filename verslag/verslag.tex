@@ -2,6 +2,39 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[dutch]{babel}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
+
+
+
+
+
+
+
+
+\lstset{language=Matlab,%
+	%basicstyle=\color{red},
+	breaklines=true,%
+	morekeywords={matlab2tikz},
+	keywordstyle=\color{blue},%
+	morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+	identifierstyle=\color{black},%
+	stringstyle=\color{mylilas},
+	commentstyle=\color{mygreen},%
+	showstringspaces=false,%without this there will be a symbol in the places where there is a space
+	numbers=left,%
+	numberstyle={\tiny \color{black}},% size of the numbers
+	numbersep=9pt, % this defines how far the numbers are from the text
+	emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+	%emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
+
+
+
 
 \date{Academiejaar 2017-2018}
 \address{
@@ -21,14 +54,32 @@ Andries Vansweevelt
 
 \section*{Inleiding}
 
-Inleidende tekst.
+Dit verslag behandeld de vragen en antwoorden gesteld in het eind-project numerieke wiskunde 2017. De hoofdvraag in dit project is hoe wortels/nulpunten van een willekeurige veelterm kunnen gevonden worden met de methode van Newton-Raphson en de methode van Bairstow. Verder behandelt dit verslag de performantie en fouten op beide algoritmen en  sluit af met deze met elkaar te vergelijken. Beide methoden werden geïmplementeerd in matlab en getest op 10 gegeven veeltermen, met complexe en reële nulpunten. 
+Verder werden verschillende opgedragen ease-of-use features geïmplementeerd, zoals een figuur plotten indien enkel de coëfficiënten gegeven.
 
-\section{Sectie-titel}
+\section{Newton-Raphson}
+Dit hoofdstuk bespreekt de implementatie van Newton-Raphson, waarin onder andere de methode van Horner, samen met een analyse van de performantie en fouten.
 
-Tekst.
+\subsection{Evaluatie veelterm en zijn afgeleide m.b.v. het Hornerschema}
+Hier wordt opdracht 1 besproken. \\~\\
+Met het uitgebreide Hornerschema, besproken in \cite{bultheel2006inleiding}, kan een veelterm geëvalueerd in een gegeven punt. Daarna kan met een deel van de oplossing verder gewerkt worden om 1-per-1 de afgeleiden van de veelterm te evalueren in hetzelfde punt.\\
+Dit werd als volgt geïmplementeerd:\\
+
+\lstinputlisting{../matlab/my_polyval.m}
+
+~\\~\\~\\
+Zoals in \cite{bultheel2006inleiding} wordt aangetoond, worden de m eerste afgeleid ( inclusief $f^{(0)}$) gevonden, door m keer het schema van Horner toe te passen op p waarna de functiewaarde van i'de afgeleide gegeven wordt door $k!b^{k+1}_{n-k}$. Merk op dat in de `afgeleide' iteratie, de `afgeleide' - 1 'ste afgeleide behandeld wordt om beter matlabs vector nummering in te kunnen spelen.\\
+Het 1'ste element van p, dus de coefficient van de hoogste graad term, wordt nooit aangepast omdat volgens Horner $a_0 = b_0$. Daarna worden de rest van de coefficienten aangepast volgens $b_i = a_i + b_{i-1}*x$. Er wordt rekening gehouden met het feit dat de graad van de veelterm bij iedere iteratie van de afgeleide met 1 verlaagd wordt.
+~\\~\\Een bijkomende opdracht was om zo weinig mogelijk geheugen te gebruiken. Om hier mee om te gaan werd in de vector p zelf gewerkt. Dit is geen enkel probleem omdat je nooit de oude vorige elementen nodig hebt en omdat matlab call-by-value is. Dit wil zeggen dat matlab p kopieert en de kopie meegeeft aan de functie waar mee gewerkt mag worden zonder dat de originele p wordt aangepast. 
+Het enige geheugen dat extra wordt aangemaakt, is het geheugen gebruikt om de functie waarden terug te geven een de oproeper van de functie.
+Dit wil zeggen dat het geheugengebruik van de functie van orde $\Theta( n + m )$ is, met n de graad + 1 van p en m het aantal keer dat afgeleid moet worden.
 
 \section*{Besluit}
 
 Afsluitende tekst
+
+
+\bibliographystyle{unsrt}
+\bibliography{verslag}
 
 \end{document}
