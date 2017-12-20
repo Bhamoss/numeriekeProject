@@ -11,7 +11,7 @@ function ws = bairstow( p, start, tol)
 %
 %   @param start
 %       De 2 startwaarden nodig om Bairstow aan te vatten.
-%       Dit is een 1 x 2 vector met [ p u ]
+%       Dit is een 1 x 2 vector met [ a b ]
 %
 %   @param tol
 %       De tolerantie van de fout, indien niet meegegeven 10^-6.
@@ -23,15 +23,16 @@ function ws = bairstow( p, start, tol)
 
 % Grootte van p bepalen.
 
+
 grootteP = size( p );
 grootteP = grootteP(2);
 
 
 % Kijken of p minstens 3de graads is.
 
-if grootteP < 4
+if grootteP < 3
    
-    disp("De meegegeven veelterm moet minstens van graad 3 zijn.");
+    disp("De meegegeven veelterm moet minstens van graad 2 zijn.")
     ws = NaN;
     return
     
@@ -47,79 +48,42 @@ end
 
 % Werk vector initialiseren.
 
-werkVector = zeros( 1, grootteP);
-werkVector2 = zeros( 1, grootteP);
-
 
 % Fout initialiseren.
 
 fout = tol + 1;
 
 iterator = 0;
+mu = start(1)+ start(2);
+rho = start(1)*start(2);
 while fout > tol && iterator < 10000
-
-    % De eerste twee speciale gevallen doen
     
-    werkVector(1) = p(1) -start(1);
-    werkVector(2) = p(2) + werkVector(1) * start(1) - start(2);
-
-    % De eerste keer dubbelrijig horner ( b's berekenen)
-
-    for graad = 3:grootteP
-    
-      %Dubbelrijig horner
-    
-       werkVector(graad) = p(graad) + werkVector(graad - 1) * start(1) + werkVector(graad - 2) * start(2);
-    
-    end
-
-    
-    % b1 en b0 opslaan
-    
-    werkVector2(1) = werkVector( 1) -start(1);
-    werkVector2(2) = werkVector( 2) - werkVector2(1)*start(1)-start(2);
-    
-
-    % Partiele afgeleiden berekenen.
-    
-    % De eerste twee speciale gevallen doen
-    
-    %werkVector(2) = werkVector2(1) + werkVector2(2) * start(1);
-
-    % De tweede keer dubbelrijig horner 
-
-    for graad = 3:(grootteP - 1)
-    
-      %Dubbelrijig horner
-    
-       werkVector2(graad) = werkVector(graad) - werkVector2(graad - 1) * start(1) - werkVector2(graad - 2) * start(2);
-    
-    end
-    
+    werkVector = doubleHorner(p,rho,mu);
     
     % Het 2 x 2 stelsel oplossen om delta p en delta u te vinden
+    dbNaardrho(1) = 0;
+    dbNaardrho(2) = werkVector(1);
+    dbNaardmu(1) = 0;
+    dbNaardmu(2) = 0;
+     for graad = 3:grootteP
+         dbNaardmu(graad) = dbNaardrho(graad-1);
+         dbNaardrho(graad) = werkVector(graad-1) + rho*dbNaardrho(graad-1) + mu*dbNaardrho(graad-2);
+     end
+    D =dbNaardrho(grootteP-1)*dbNaardmu(grootteP) - dbNaardrho(grootteP)*dbNaardmu(grootteP-1);
     
-    opl = linsolve( [ werkVector(grootteP - 2) , werkVector(grootteP - 3) ; werkVector(grootteP - 1) , werkVector(grootteP - 2) ], [ -werkVector2(1) ; -werkVector2(2) ]);
+    deltaRho = -1/D *(werkVector(grootteP-1)*dbNaardmu(grootteP) - werkVector(grootteP)*dbNaardmu(grootteP-1));
+    deltaMu = -1/D * (werkVector(grootteP)*dbNaardrho(grootteP-1) - werkVector(grootteP-1)*dbNaardrho(grootteP));  
+
+    fout =  max(abs(werkVector(grootteP)),abs(werkVector(grootteP-1)));
     
-    pVorig = start(1);
-    uVorig = start(2);
-    
-    start(1) = start(1) + opl(1);
-    start(2) = start(2) + opl(2);
-    
-    pFout = abs( start(1) - pVorig );
-    uFout = abs( start(2) - uVorig );
-    
-    if pFout > uFout
-        fout = pFout;
-    else 
-        fout = uFout;
+    if fout > tol
+        rho = rho + deltaRho;
+        mu = mu + deltaMu;
     end
-    
     iterator = iterator + 1;
 end
 
-ws = quadroots( [1,start(1),start(2)] );
+ws = quadroots( [1,-rho,-mu] );
 
 end
 
