@@ -6,11 +6,11 @@ function y = my_polyval( p, x, m)
 %
 %   @param p
 %       De veelterm die geevalueerd zal worden, voorgesteld door zijn
-%       coefficienten als vector, met de hoogste graad term als eerste
+%       coëfficiënten als vector, met de hoogste graad term als eerste
 %       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param x
-%       Het punt waarin de functies zullen geevalueerd worden.
+%       Het punt waarin de functies zullen geëvalueerd worden.
 %
 %   @param m
 %       Het aantal keer dat p moet afgeleid worden.
@@ -38,8 +38,8 @@ for afgeleide = 1:m+1
     
     for coefficient = 2:(graadStartPlusEen - afgeleide+1)
         
-        %De coefficienten aanpassen. Alle ellementen van p voor 
-        %p(coefficient) zijn al aangepast, dus de 2de term
+        %De coëfficiënten aanpassen. Alle ellementen van p voor 
+        %p(coëfficiënt) zijn al aangepast, dus de 2de term
         %in onderstaande formule ook.
         
         p(coefficient) = p(coefficient) + p(coefficient - 1)*x;

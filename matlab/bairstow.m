@@ -6,7 +6,7 @@ function ws = bairstow( p, start, tol)
 %
 %   @param p
 %       De veelterm die geevalueerd zal worden, voorgesteld door zijn
-%       coefficienten als vector, met de hoogste graad term als eerste
+%       coëfficiënten als vector, met de hoogste graad term als eerste
 %       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param start

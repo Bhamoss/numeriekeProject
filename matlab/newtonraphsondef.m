@@ -6,7 +6,7 @@ function ws = newtonraphsondef( p, start, tol)
 %
 %   @param p
 %       De veelterm die geevalueerd zal worden, voorgesteld door zijn
-%       coefficienten als vector, met de hoogste graad term als eerste
+%       coëfficiënten als vector, met de hoogste graad term als eerste
 %       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param start
@@ -20,13 +20,6 @@ function ws = newtonraphsondef( p, start, tol)
 %       tolerantie tol indien de fouttolerantie van de gevonden waarden
 %       kleiner of gelijk is aan tol, anders NaN.
 %
-
-
-%ZORG DAT JE ALLES VIND, DOE DIT DOOR NIEUWE STARTWAARDEN TE DOEN INGEVEN
-%INDIEN NIET ALLES WERD GEVONDEN, DOE DIT ZOALS AANGEGEVEN IN DE OPGAVE
-
-%zeg dat ze desnoods een complexe startwaarde moeten geven,
-%want enkel zo kun je complexe nulpunten vinden.
 
 
 % p mag geen 0de graads zijn.

@@ -5,7 +5,7 @@ function ws = bairstowdef( p, start, tol)
 %
 %   @param p
 %       De veelterm die geevalueerd zal worden, voorgesteld door zijn
-%       coefficienten als vector, met de hoogste graad term als eerste
+%       coëfficiënten als vector, met de hoogste graad term als eerste
 %       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param start
@@ -18,14 +18,6 @@ function ws = bairstowdef( p, start, tol)
 %   @return ws
 %       De gevonden nulpunten.
 %
-
-
-% Bairstow tot graad kleiner is dan drie, dan quadroots of gewoon lineair
-%ZORG DAT JE ALLES VIND, DOE DIT DOOR NIEUWE STARTWAARDEN TE DOEN INGEVEN
-%INDIEN NIET ALLES WERD GEVONDEN, DOE DIT ZOALS AANGEGEVEN IN DE OPGAVE
-
-%zeg dat ze desnoods een complexe startwaarde moeten geven,
-%want enkel zo kun je complexe nulpunten vinden.
 
 
 % p mag geen 0de graads zijn.
@@ -128,12 +120,17 @@ while nbGevondenNulpunten ~= grootteP - 1
         
         % Vraag om juiste input
         
-        input_hf = str2double(input('Geen nulpunt gevonden, geef 2 nieuwe (misschien complexe) startwaarden: ','s'));
-        while isnan(input_hf(1)) || fix(input_hf(1)) ~= input_hf(1) || isnan(input_hf(2)) || fix(input_hf(2)) ~= input_hf(2)
-            input_hf = str2double(input('Geef 2 getallen in: ','s'));
+        input_hf = str2double(input('Geen nulpunt gevonden, geef eerste van 2 nieuwe (misschien complexe) startwaarden: ','s'));
+        while isnan(input_hf() || fix(input_hf) ~= input_hf
+            input_hf = str2double(input('Geef eerste getallen in: ','s'));
+        end
+        start(1) = input_hf;
+        input_hf = str2double(input('Geen nulpunt gevonden, geef tweede van 2 nieuwe (misschien complexe) startwaarden: ','s'));
+        while isnan(input_hf() || fix(input_hf) ~= input_hf
+            input_hf = str2double(input('Geef tweede getallen in: ','s'));
         end
         
-        start = input_hf(1);
+        start(2) = input_hf;
     end
     
     

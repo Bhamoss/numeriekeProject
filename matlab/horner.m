@@ -7,7 +7,7 @@ function q = horner( p, x)
 %
 %   @param p
 %       De veelterm die de deflatie ondergaat, voorgesteld door zijn
-%       coefficienten als vector, met de hoogste graad term als eerste
+%       coëfficiënten als vector, met de hoogste graad term als eerste
 %       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param x
@@ -15,7 +15,7 @@ function q = horner( p, x)
 %
 %   @result q
 %       De veelterm die het resultaat is van de deflatie van p, voorgesteld
-%       door zijn coefficienten als vector, met de hoogste graad term als 
+%       door zijn coëfficiënten als vector, met de hoogste graad term als 
 %       eerste element enzovoort. Dit is een 1 x n vector.
 %
 
@@ -39,7 +39,7 @@ if grootteP <= 2 && not( isreal(x) )
    return
 end
 
-% Coefficienten van de hoogste graad termen van p en q zijn gelijk.
+% Coëfficiënten van de hoogste graad termen van p en q zijn gelijk.
 
 q(1) = p(1);
 
@@ -66,7 +66,7 @@ if not( isreal(x) )
     
     q = zeros( 1, grootteP - 2);
     
-    % Coefficienten van de hoogste graad termen van p en q zijn gelijk.
+    % Coëfficienten van de hoogste graad termen van p en q zijn gelijk.
     
     q(1) = a(1);
     

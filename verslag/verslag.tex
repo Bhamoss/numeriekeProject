@@ -234,13 +234,22 @@ Deze implementatie is in feite bijna identiek aan die van Newton-Raphson. Behalv
 \subsection{convplots van Bairstow en Newton-Raphson}
 Hier wordt opdracht 10 besproken.
 \\~\\
-\includegraphics[]{nrPlot}
-\includegraphics[]{brPlot}
+\begin{figure}
+	\label{img:nr}
+	\includegraphics[scale = 0.6]{nrPlot}
+	\caption{Het convplot van Newton-Raphson}
+\end{figure}
+\begin{figure}
+	\label{img:br}
+	\includegraphics[scale = 0.6]{brPlot}
+	\caption{Het convplot van Bairstow.}
+\end{figure}
+
 We kunnen enkel dingen toch duidelijk aanhalen uit de 2 plots:
 \begin{itemize}
 	\item Bairstow heeft veel minder logische en gelijk verdeelde vlakken. Dit komt waarschijnlijk door de grote sprongen die het kan maken. Dit omdat het met 2 variabelen werkt.
 	\item Newton-Raphson heeft een zeer afgebakende structuur en alles convergeert naar iets in de dichte omgeving. Dit waarschijnlijk omdat de afgeleiden ervoor zorgen dat we aan een soort van hillclimbing gaan doen.
-	\item Aan de randen van Bairstow kunnen we waar nemen dat we convergeren naar totaal andere punten. Deze zone is zeer klein in vergelijking met de geweven structuur van Newton-Raphson. We kunnen dus veel beter voorspellen waarnaar een punt zal convergeren bij Bairstow als we de algemene plot weten. Terwijl Newton-Raphson duidelijker rond het punt convergeert maar minder voorspelbaar is op de randen.
+	\item  De geweven structuur van newton-Raphson duid op de onvoorspelbaarheid over de convergentie aan de diagonalen.
 \end{itemize}
 
 

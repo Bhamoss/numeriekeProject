@@ -7,7 +7,7 @@ function q = doubleHorner(p,rho,mu)
 %
 %   @param p
 %       De veelterm die de deflatie ondergaat, voorgesteld door zijn
-%       coefficienten als vector, met de hoogste graad term als eerste
+%       coëfficiënten als vector, met de hoogste graad term als eerste
 %       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param rho
@@ -17,7 +17,7 @@ function q = doubleHorner(p,rho,mu)
 %
 %   @result q
 %       De veelterm die het resultaat is van de deflatie van p, voorgesteld
-%       door zijn coefficienten als vector, met de hoogste graad term als 
+%       door zijn coëfficiënten als vector, met de hoogste graad term als 
 %       eerste element enzovoort. Dit is een 1 x n vector.
 %
 grootteP = size( p );

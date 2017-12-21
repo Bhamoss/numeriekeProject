@@ -7,20 +7,20 @@ function ws = quadroots( p)
 %
 %   @param p 
 %       De 2de graads veelterm die geevalueerd zal worden, voorgesteld door
-%       zijn coefficienten als vector, met de hoogste graad term als eerste
+%       zijn coëfficiënten als vector, met de hoogste graad term als eerste
 %       element enzovoort.
 %
 %
 %   @return ws
 %       De 2 nulpunten van de p.
 
-% Indien a klein is, wordt de noemer en teller met 100 vermenigvuldigt voor
+% Indien a klein is, wordt de noemer en teller met 100 vermenigvuldigd voor
 % een verbetering in de stabiliteit
 
 
 if p(1) < 1
     
-    % 128 is 2^7, die normaal goed is voor de stabiliteit, want dit is
+    % 128 is 2^7, wat normaal goed is voor de stabiliteit, want dit is
     % de basis voor floats volgens de IEEE standaard, dus zorgt dit voor
     % zo min mogelijk nauwkeurigheidsverlies.
     
