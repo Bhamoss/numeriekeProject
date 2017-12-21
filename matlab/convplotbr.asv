@@ -1,11 +1,12 @@
-function convplotnr(p, x0, a, b, tol)
+function convplotbr(p, x0, a, b, tol)
     % function convplot(p, x0, a, b, tol)
     %   Deze functie maakt een plot die aangeeft welke startwaarden naar
     %   welk nulpunt convergeren.
     %
     % Inputs
     %   p   : Vector met de coëfficiënten van de veelterm
-    %   x0  : Een startwaarde voor het vinden van alle nulpunten
+    %   x0  : Een startwaarde voor het vinden van alle nulpunten Dit is
+    %   een 1 x2 vector[ a b]
     %   a   : Een vector met alle waardes voor het reële deel van de
     %           startwaarde die gebruikt moeten worden
     %   b   : Een vector met alle waardes voor het imaginaire deel van de
@@ -20,7 +21,7 @@ function convplotnr(p, x0, a, b, tol)
     
     % Zoek alle nulpunten van de veelterm en plot deze
     styles = {'b', 'k', 'c', 'm', 'g', 'y'};
-    ws = newtonraphsondef(p, x0, tol);
+    ws = bairstowdef(p, x0, tol);
     if size(ws, 2) < size(p, 2)-1
         error('not all zeros found')
     end
@@ -36,32 +37,51 @@ function convplotnr(p, x0, a, b, tol)
     for k = a
         for l = b
             
-            huidigNulpunt = newtonraphson( p, k + 1i*l);
+            huidigNulpunt = bairstow( p, [k + 1i*l,k - 1i*l]);
             
-            if isnan(huidigNulpunt)
+            if isnan(huidigNulpunt(1))
                 plot( k, l, ['r' '.'], 'MarkerSize', 20, 'Linewidth', 5)
             else
                 
-                kleur = 0;
+                kleur1 = 0;
                 
                 for j = 1:size(ws, 2)
                     
                     % Kijken of het nulpunt hetzelfde is
-                    verschil = abs( ws(j) - huidigNulpunt );
+                    verschil1 = max(abs(imag(ws(j)) - imag(huidigNulpunt(1))),abs(real(ws(j)) - real(huidigNulpunt(1))));
                     
-                    if verschil  <=  tol
-                        kleur = j;
+                    if verschil1  <= tol
+                        kleur1 = j;
                     end
                     
                 end
                 
-                if kleur == 0
-                    error("Nulpunten komen niet overeen");
+                if kleur1 == 0
+                    error("Nulpunten komen niet overeen" + huidigNulpunt(1));
                 end
                 
-                plot( k, l, [styles{kleur} '.'], 'MarkerSize', 20, 'Linewidth', 5)
+                plot( k, l, [styles{kleur1} '.'], 'MarkerSize', 20, 'Linewidth', 5)
+                if(size(huidigNulpunt,2) > 1)
+                    kleur2 = 0;
+                
+                    for j = 1:size(ws, 2)
+                    
+                        % Kijken of het nulpunt hetzelfde is
+                        verschil2 =  max(abs(ws(j) - huidigNulpunt(2)),abs(real(ws(j)) - real(huidigNulpunt(2))));
+                    
+                        if verschil2  <= tol
+                            kleur2 = j;
+                        end
+                    
+                    end
+                
+                    if kleur2 == 0
+                        error("Nulpunten komen niet overeen" + huidigNulpunt(2));
+                    end
+                
+                    plot( k, -l, [styles{kleur2} '.'], 'MarkerSize', 20, 'Linewidth', 5)
+                end
             end
-            
             
             % TODO: bereken het nulpunt, met als startwaarde k+il
             % plot een stip op de figuur op de plaats van de gebruikte
