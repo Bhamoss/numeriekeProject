@@ -1,7 +1,8 @@
-function ws = bairstowdef( p, start, tol)
-%bairstowdef Berekent alle nulpunten van p met de methode van Bairstow.
-%   
-%   Signatuur: ws = bairstowdef( p, start, tol)
+function ws = newtonraphsondef( p, start, tol)
+%newtonraphsondef Geeft alle nulpunten van de veelterm p terug met fouten
+%tolerantie tol (standaard 10^-6).
+%
+%   Signatuur: ws = newtonraphsondef( p, start, tol)
 %
 %   @param p
 %       De veelterm die geevalueerd zal worden, voorgesteld door zijn
@@ -9,18 +10,18 @@ function ws = bairstowdef( p, start, tol)
 %       element enzovoort. Dit is een 1 x n vector.
 %
 %   @param start
-%       De 2 startwaarden nodig om Bairstow aan te vatten.
-%       Dit is een 1 x 2 vector met [ a b ]
+%       De startwaarde nodig om Newton-Raphson aan te vatten.
 %
 %   @param tol
-%       De tolerantie van de fout, indien niet meegegeven 10^-6.
+%       De tolerantie van de fout, indien niet meegegeven 10^-6
 %
 %   @return ws
-%       De gevonden nulpunten.
+%       de nulpunten gevonden aan de hand van de starwaarde binnen de
+%       tolerantie tol indien de fouttolerantie van de gevonden waarden
+%       kleiner of gelijk is aan tol, anders NaN.
 %
 
 
-% Bairstow tot graad kleiner is dan drie, dan quadroots of gewoon lineair
 %ZORG DAT JE ALLES VIND, DOE DIT DOOR NIEUWE STARTWAARDEN TE DOEN INGEVEN
 %INDIEN NIET ALLES WERD GEVONDEN, DOE DIT ZOALS AANGEGEVEN IN DE OPGAVE
 
@@ -32,8 +33,8 @@ function ws = bairstowdef( p, start, tol)
 
 grootteP = size(p);
 grootteP = grootteP(2);
-if grootteP <= 3
-    disp("Functie moet minstens graad 3 zijn!");
+if grootteP <= 1
+    disp("Functie moet minstens graad 1 zijn!");
     ws = NaN;
     return
 end
@@ -62,33 +63,32 @@ nbGevondenNulpunten = 0;
 
 while nbGevondenNulpunten ~= grootteP - 1
 
-    if(grootteP - 1 - nbGevondenNulpunten == 1)
-        huidigNulpunt = -p(2)/p(1);
+    if(size(p,2) > 2)
+        huidigNulpunt = newtonraphson( p, start, tol);
     else
-        huidigNulpunt = bairstow( p, start, tol);
-        if (abs(imag(huidigNulpunt(2))) < tol)
-        huidigNulpunt(2) = real(huidigNulpunt(2));
-        end
+        huidigNulpunt = -p(2)/p(1);
     end
-    if (abs(imag(huidigNulpunt(1))) < tol)
-        huidigNulpunt(1) = real(huidigNulpunt(1));
-    end
+    if (abs(Imag(huidigNulpunt))) < tol)
+        huidigNulpunt = real(
     
-    huidigeGrootteNulpunt = size(huidigNulpunt);
-    huidigeGrootteNulpunt = huidigeGrootteNulpunt(2);
-    
-    if ~isnan(huidigNulpunt(1))
+    if ~isnan(huidigNulpunt)
         %Nulpunt gevonden binnen de tolerantie:
         %Deel nulpunt weg en voeg nulpunt toe aan ws
         
-        nbGevondenNulpunten = nbGevondenNulpunten + huidigeGrootteNulpunt;
+        nbGevondenNulpunten = nbGevondenNulpunten + 1 ;
         
-        if(huidigeGrootteNulpunt > 1)
-            p = doubleHorner(p, huidigNulpunt(1)+ huidigNulpunt(2), huidigNulpunt(1)* huidigNulpunt(2));
-            ws(nbGevondenNulpunten-1) = huidigNulpunt(2);
+        
+        p = horner( p, huidigNulpunt);
+        
+        
+        ws(nbGevondenNulpunten) = huidigNulpunt;
+        
+        %Indien het nulpunt complex is werd zijn toegevoegde ook
+        %weggedeelt:
+        if not(isreal(huidigNulpunt))
+            nbGevondenNulpunten = nbGevondenNulpunten + 1 ;
+            ws(nbGevondenNulpunten) = conj(huidigNulpunt);
         end
-        start = 0.9 * huidigNulpunt;
-        ws(nbGevondenNulpunten) = huidigNulpunt(1);
         
     else
         % Geen nulpunt gevonden, laad nieuwe startwaarde
@@ -128,16 +128,16 @@ while nbGevondenNulpunten ~= grootteP - 1
         
         % Vraag om juiste input
         
-        input_hf = str2double(input('Geen nulpunt gevonden, geef 2 nieuwe (misschien complexe) startwaarden: ','s'));
-        while isnan(input_hf(1)) || fix(input_hf(1)) ~= input_hf(1) || isnan(input_hf(2)) || fix(input_hf(2)) ~= input_hf(2)
-            input_hf = str2double(input('Geef 2 getallen in: ','s'));
+        input_hf = str2double(input('Geen nulpunt gevonden, geef nieuwe (misschien complexe) startwaarde: ','s'));
+        while isnan(input_hf) || fix(input_hf) ~= input_hf
+            input_hf = str2double(input('Geef een getal in: ','s'));
         end
         
-        start = input_hf(1);
+        start = input_hf;
+        
     end
     
     
 end
-
 end
 

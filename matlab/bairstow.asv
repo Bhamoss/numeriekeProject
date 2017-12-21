@@ -57,7 +57,7 @@ iterator = 0;
 mu = start(1)+ start(2);
 rho = start(1)*start(2);
 while fout > tol && iterator < 10000
-
+    
     werkVector(1) = p(1);
     werkVector(2) =  p(2) + werkVector(1) * rho;
 
@@ -70,6 +70,7 @@ while fout > tol && iterator < 10000
        werkVector(graad) = p(graad) + werkVector(graad - 1) * rho + werkVector(graad - 2) * mu;
     
     end
+    werkVector = doubleHorner(p,rho,mu);
     
     % Het 2 x 2 stelsel oplossen om delta p en delta u te vinden
     dbNaardrho(1) = 0;

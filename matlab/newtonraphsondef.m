@@ -63,8 +63,14 @@ nbGevondenNulpunten = 0;
 
 while nbGevondenNulpunten ~= grootteP - 1
 
-    
-    huidigNulpunt = newtonraphson( p, start, tol); 
+    if(size(p,2) > 2)
+        huidigNulpunt = newtonraphson( p, start, tol);
+    else
+        huidigNulpunt = -p(2)/p(1);
+    end
+    if (abs(imag(huidigNulpunt)) < tol)
+        huidigNulpunt = real(huidigNulpunt);
+    end
     
     if ~isnan(huidigNulpunt)
         %Nulpunt gevonden binnen de tolerantie:
@@ -80,8 +86,7 @@ while nbGevondenNulpunten ~= grootteP - 1
         
         %Indien het nulpunt complex is werd zijn toegevoegde ook
         %weggedeelt:
-        
-        if not( isreal(huidigNulpunt) )
+        if not(isreal(huidigNulpunt))
             nbGevondenNulpunten = nbGevondenNulpunten + 1 ;
             ws(nbGevondenNulpunten) = conj(huidigNulpunt);
         end
