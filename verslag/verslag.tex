@@ -94,7 +94,7 @@ Indien een willekeurig veelterm gegeven wordt en een startwaarde, kan via de for
 $x_{i+1} = x_i + \frac{ p(x_i) }{ p^{'}(x_i) }$) een nieuwe x gevonden worden, die dichter bij het nulpunt ligt als er convergentie optreedt.
 
 \subsubsection{Implementatie}
-
+\label{sec:NR}
 \lstinputlisting{../matlab/newtonraphson.m}
 ~\\~\\
 Het iteratief berekenen van de volgende x, wordt gestopt op 2 manieren:
@@ -148,19 +148,110 @@ Omdat deze functie op zich niet veel rekenwerk bevat, maar dit wordt doorgegeven
 Bij het plotten van de functie zijn kleine fouten niet zo belangrijk, omdat dit op een grote schaal gebeurt en omdat een plot sowieso nooit als betrouwbaar mag gezien worden.
 
 \section{Bairstow}
+De methode van Bairstow werkt door telkens bij iedere stap 2 nulpunten af te zonderen. Dit zorgt ervoor dat de methode nog sneller convergeert. Wel hebben we om dit efficiënt te doen verlopen het dubbelrijige Hornerschema nodig. Dit hoofdstuk bespreekt de implementatie van dat schema, de implementatie van het algoritme van Bairstow zelf en hoe we dan een algoritme implementeren die aan de hand van de methode van Bairstow alle nulpunten van een gegeven veelterm teruggeeft.
+
+\subsection{Evaluatie via dubbelrijige Horner}
+
+Om de 2 nulpunten effeciënt te kunnen evalueren is er een nieuwe functie geïmplementeerd die het dubbelrijige algoritme van Horner gebruikt. Dit laat ons toen om in $(2n+1)V$ en $2nO$ de beide te evalueren in plaats van $(4n-2)V$ en $(3n-2)O$ \cite{bultheel2006inleiding}.
+
+\subsubsection{Implementatie}
+\lstinputlisting{../matlab/doubleHorner.m}
+~\\~\\
+De implementatie heeft invloeden met die van sectie \ref{sec:horUit} met 1 iteratie. Echter zal nu bij elke coëfficiënt direct het gevolg van het afzonderen van beide nulpunten in rekening worden gebracht. Daarom baseert deze methode zich ook op de 2 voorgaande coëfficiënten. wat de basisstap wat uitgebreider maakt. De methode berekent dus een veelterm van 2 graden lager dan p. 
+
+\subsubsection{Fouten}
+
+De stabiliteit van deze methode lijd onder dezelfde problemen als \ref{sec:horUit}:
+\begin{itemize}
+	\item In lijn 28, als p(2) en q(1)*rho bijna even groot zijn en tegengesteld teken hebben.
+	\item In lijn 34, als p(graad) en q(graad - 1)*rho of q(graad - 1)*rho en -q(graad-2)*mu bijna even groot zijn en tegengesteld teken hebben.
+\end{itemize}
+\subsubsection{Vinden van de 2 nulpunten uit de 2de-graadsfunctie}
+Hier wordt opdracht 5 besproken.
+\\~\\
+Omdat Bairstow telkens een 2-de graadsveelterm afzondert, hebben we nog een methode nodig die efficiënt de wortels uit die veelterm haalt. Daarvoor gebruiken we de functie quadroots. Deze berekent de 1 wortel uit de veelterm en gaat dan iteratief tewerk om de 2e wortel te bepalen.
+
+\subsubsection{Implementatie}
+\lstinputlisting{../matlab/quadroots.m}
+~\\~\\
+
+Een nuttige extra parameter en bijdrage aan de implementatie zou zijn dat men kan de stabiliteitsverhoger instellen naargelang de grootte van het probleem. Dit zou de robuustheid van het algoritme zeker ten goede komen.
+
+\subsection{Een nulpunt vinden met Bairstow}
+Hier wordt opdracht 6 besproken.
+\\~\\
+Indien een willekeurig veelterm gegeven wordt en 2 startwaardes, kan via de formules van Bairstow een nieuwe $\rho$ en $\mu$ gevonden worden, die dichter bij het nulpunt ligt als er convergentie optreedt. Doordat we telkens 2 nulpunten afzonderen zal deze kwadratisch convergeren.
+
+\subsubsection{Implementatie}
+
+\lstinputlisting{../matlab/bairstow.m}
+
+~\\~\\
+Het iteratief berekenen van de volgende $\rho$ en $\mu$, wordt op eenzelfde manier gestopt als \ref{sec:NR}.
+
+\subsubsection{Fouten}
+De grootste fout wordt verkregen door een kleine D in de berekening van $\delta \rho$ en $\delta \mu$, door de deling in lijn 85 en 86.
+
+\subsection{Alle nulpunten vinden}
+Hier wordt opdracht 7 besproken.
+\\~\\
+Met al deze werd zoals gevraagd een implementatie gemaakt die alle nulpunten berekent van een gegeven veelterm. Deze methode vraagt om een veelterm, 2 (mogelijks complexe) startwaarden en een tolerantie die $10^{-6}$ is indien niet meegegeven. Er worden 2 nulpunten bepaald met de methode van Bairstow met de gegeven startwaarde, waarna die nulpunten weggedeeld wordt met de methode van de dubbelrijige Horner. Er wordt met de nieuwe veelterm die door Horner werd teruggegeven verder gewerkt en er wordt opnieuw een nulpunt met Bairstow bepaald met als startwaarden de vorige gevonden nulpunten. Indien de graad van p nu kleiner zou zijn dan 2, dan kunnen we rechtstreeks het laatste nulpunt berekenen.
+\\
+Dit wordt gedaan tot alle nulpunten van de veelterm gevonden worden.
+\\
+Als Bairstow niet convergeert, en dus NaN wordt teruggegeven, wordt de huidige functie geplot en om  nieuwe startpunten gevraagd aan de gebruiker.\\
+Uiteindelijk wordt een vector met alle nulpunten van p teruggegeven.
+
+\subsubsection{Implementatie}
+\lstinputlisting{../matlab/bairstowdef.m}
+~\\~\\
+
+\subsubsection{Fouten}
+Deze functie zelf bevat opnieuw niet veel pijnpunten. 
+\\
+Het plotten voldoet aan dezelfde voorwaarden als bij Newton-Raphson.
+
+\section{testen van robuustheid}
+Hier wordt opdracht 8 besproken.
+\\~\\
+Beide functies (newtonraphsondef en bairstowdef) werden uitgevoerd op de volledige testbank. Daaruit bleek dat Newton-Raphson minder snel gaat convergeren dan Bairstow. Maar beide implementaties leverden betrouwbare resultaten en kunnen toch als robuust beschouwd worden.
 
 \section{Convplot}
+Hier wordt opdracht 9 besproken.
+\\~\\
+Er zijn verschillende implementaties voor convplot, en deze worden apart besproken.
+\subsection{convplot voor Newton-Raphson}
+De convplot voor Newton-Raphson is als volgt geïmplementeerd:
+\lstinputlisting{../matlab/convplotnr.m}
+~\\~\\
+Wat we in feite doen is een lijst opstellen met voor elke nulwaarde van newtonraphsondef op onze gegeven starwaarde een kleur. En dan de gehele lijst met mogelijke startwaarden overlopen en dan kijken welk punt (binnen de tolerantie) gelijk is aan het verkregen nulpunt. Indien we een Nan terugkregen plotten we een rood punt.
+\subsection{convplot voor Bairstow}
+De convplot voor Bairstow is als volgt geïmplementeerd:
+\lstinputlisting{../matlab/convplotbr.m}
+~\\~\\
+Deze implementatie is in feite bijna identiek aan die van Newton-Raphson. Behalve dat we moeten rekening houden met het feit dat we 2 nulpunten kunnen meekrijgen.
 
-Bekijk welke punten niet tot convergentie leiden.
-Zoek ook patronen, en plaatsen waar precies willekeurig een nulpunt optreed.
+\subsection{convplots van Bairstow en Newton-Raphson}
+Hier wordt opdracht 10 besproken.
+\\~\\
+\includegraphics[]{nrPlot}
+\includegraphics[]{brPlot}
+We kunnen enkel dingen toch duidelijk aanhalen uit de 2 plots:
+\begin{itemize}
+	\item Bairstow heeft veel minder logische en gelijk verdeelde vlakken. Dit komt waarschijnlijk door de grote sprongen die het kan maken. Dit omdat het met 2 variabelen werkt.
+	\item Newton-Raphson heeft een zeer afgebakende structuur en alles convergeert naar iets in de dichte omgeving. Dit waarschijnlijk omdat de afgeleiden ervoor zorgen dat we aan een soort van hillclimbing gaan doen.
+	\item Aan de randen van Bairstow kunnen we waar nemen dat we convergeren naar totaal andere punten. Deze zone is zeer klein in vergelijking met de geweven structuur van Newton-Raphson. We kunnen dus veel beter voorspellen waarnaar een punt zal convergeren bij Bairstow als we de algemene plot weten. Terwijl Newton-Raphson duidelijker rond het punt convergeert maar minder voorspelbaar is op de randen.
+\end{itemize}
+
 
 \section{Newton-Raphson VS Bairstow}
-
-Volgens die mail van Andries convergeert Bairstow altijd, dus das een groot voordeel maar kijk nog eens verder
+Hier wordt opdracht 11 besproken.
+\\~\\
+Men kan zien dat Bairstow heel wat complexer is dan Newton-Raphson en ook altijd convergeert. Het convergeert ook in veel groter zones dan Newton-Raphson. Bairstow laat wel veel meer ruimte voor het opblazen van fouten en is een stuk geheugenintensiever dan newton-Raphson. Men kan zelf op beperkte instanties op beperkte machines een verschil in performatie voelen. Maar het geeft wel over het algemeen de beste resultaten en convergeert dus ook veel sneller. Het zal dus een betere methode zijn, maar om op krachtigere machines te draaien.
 
 \section*{Besluit}
 
-Afsluitende tekst
+We zien dat Newton-Raphson en bairstow vrij eenvoudige theoretische modellen zijn, maar dat deze we vrij snel door kleine verschillen zich van elkaar onderscheiden. De implementatie is ook een stuk verschillend. Toch komen de pijnpunten in vorm grotendeels overeen.
 
 
 \bibliographystyle{unsrt}

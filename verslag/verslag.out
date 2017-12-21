@@ -12,5 +12,20 @@
 \BOOKMARK [3][-]{subsubsection.1.4.1}{Implementatie}{subsection.1.4}% 12
 \BOOKMARK [3][-]{subsubsection.1.4.2}{Fouten}{subsection.1.4}% 13
 \BOOKMARK [1][-]{section.2}{Bairstow}{}% 14
-\BOOKMARK [1][-]{section.3}{Convplot}{}% 15
-\BOOKMARK [1][-]{section.4}{Newton-Raphson VS Bairstow}{}% 16
+\BOOKMARK [2][-]{subsection.2.1}{Evaluatie via dubbelrijige Horner}{section.2}% 15
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Implementatie}{subsection.2.1}% 16
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Fouten}{subsection.2.1}% 17
+\BOOKMARK [3][-]{subsubsection.2.1.3}{Vinden van de 2 nulpunten uit de 2de-graadsfunctie}{subsection.2.1}% 18
+\BOOKMARK [3][-]{subsubsection.2.1.4}{Implementatie}{subsection.2.1}% 19
+\BOOKMARK [2][-]{subsection.2.2}{Een nulpunt vinden met Bairstow}{section.2}% 20
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Implementatie}{subsection.2.2}% 21
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Fouten}{subsection.2.2}% 22
+\BOOKMARK [2][-]{subsection.2.3}{Alle nulpunten vinden}{section.2}% 23
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Implementatie}{subsection.2.3}% 24
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Fouten}{subsection.2.3}% 25
+\BOOKMARK [1][-]{section.3}{testen van robuustheid}{}% 26
+\BOOKMARK [1][-]{section.4}{Convplot}{}% 27
+\BOOKMARK [2][-]{subsection.4.1}{convplot voor Newton-Raphson}{section.4}% 28
+\BOOKMARK [2][-]{subsection.4.2}{convplot voor Bairstow}{section.4}% 29
+\BOOKMARK [2][-]{subsection.4.3}{convplots van Bairstow en Newton-Raphson}{section.4}% 30
+\BOOKMARK [1][-]{section.5}{Newton-Raphson VS Bairstow}{}% 31

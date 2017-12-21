@@ -1,5 +1,5 @@
 function q = horner( p, x)
-%horner Voert een deflatie stap uit op p zodat p een graad lager word en
+%horner voert een deflatie stap uit op p zodat p een graad lager wordt
 %door de factor met nulpunt x, en indien x complex is ook zijn complex 
 %toegvoegde, weg te delen via de methode van Horner.
 %  

@@ -61,16 +61,9 @@ function convplotnr(p, x0, a, b, tol)
                 
                 plot( k, l, [styles{kleur} '.'], 'MarkerSize', 20, 'Linewidth', 5)
             end
-            
-            
-            % TODO: bereken het nulpunt, met als startwaarde k+il
-            % plot een stip op de figuur op de plaats van de gebruikte
-            % startwarde, met dezelfde kleur als de kleur van de * van het
-            % nulpunt dat gevonden werd.
-            % Indien er met deze startwaarde geen nulpunt gevonden werd,
-            % plot je een rode stip.
         end
     end
     axis([min(a), max(a), min(b), max(b)])
+    print('nrPlot','-depsc');
 end
 

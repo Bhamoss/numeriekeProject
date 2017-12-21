@@ -14,13 +14,6 @@ function ws = quadroots( p)
 %   @return ws
 %       De 2 nulpunten van de p.
 
-
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-% ALS JE HIER EEN PARAMETER BIJ WIL GEVEN KUN JE DE WAARDE
-% VOOR STABILITEITSVERHOGER DOEN KIEZEN, GROTER VOOR KLEINE A
-% EN KLEINER ALS DE VERWACHTE NULPUNTEN KLEIN ZULLEN ZIJN
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 % Indien a klein is, wordt de noemer en teller met 100 vermenigvuldigt voor
 % een verbetering in de stabiliteit
 
