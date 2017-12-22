@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.10)  21 DEC 2017 22:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.10.10)  22 DEC 2017 09:41
 entering extended mode
 **./verslag.tex
 (verslag.tex
@@ -1810,7 +1810,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 235--247
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 257--260
+Underfull \hbox (badness 10000) in paragraph at lines 258--261
 
  []
 
@@ -1818,28 +1818,28 @@ Underfull \hbox (badness 10000) in paragraph at lines 257--260
 AED: lastpage setting LastPage
 File: kuleuvenSedes.pdf Graphic file (type pdf)
 <use kuleuvenSedes.pdf>
-Package pdftex.def Info: kuleuvenSedes.pdf used on input line 269.
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 270.
 (pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
  [22]
 File: kuleuvenSedes.pdf Graphic file (type pdf)
  <use kuleuvenSedes.pdf>
-Package pdftex.def Info: kuleuvenSedes.pdf used on input line 269.
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 270.
 (pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
  [23 <./nrPlot.pdf>]
 File: kuleuvenSedes.pdf Graphic file (type pdf)
 
 <use kuleuvenSedes.pdf>
-Package pdftex.def Info: kuleuvenSedes.pdf used on input line 269.
+Package pdftex.def Info: kuleuvenSedes.pdf used on input line 270.
 (pdftex.def)             Requested size: 25.00282pt x 42.67912pt.
  [24 <./brPlot.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 269.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 269.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 270.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 270.
  (verslag.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 269.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 269.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 270.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 270.
 Package rerunfilecheck Info: File `verslag.out' has not changed.
 (rerunfilecheck)             Checksum: D51C3CF294EED8219C750999F9C7268E;2248.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 269.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 270.
  ) 
 Here is how much of TeX's memory you used:
  20869 strings out of 493334
@@ -1863,9 +1863,9 @@ tex/fonts/type1/public/cm-super/sfrm0500.pfb><D:/programma's/miktex/fonts/type1
 /public/cm-super/sfrm0800.pfb><D:/programma's/miktex/fonts/type1/public/cm-supe
 r/sfrm1000.pfb><D:/programma's/miktex/fonts/type1/public/cm-super/sfrm1200.pfb>
 <D:/programma's/miktex/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on verslag.pdf (24 pages, 776295 bytes).
+Output written on verslag.pdf (24 pages, 776725 bytes).
 PDF statistics:
- 1458 PDF objects out of 1728 (max. 8388607)
+ 1460 PDF objects out of 1728 (max. 8388607)
  950 named destinations out of 1000 (max. 500000)
  377 words of extra memory for PDF output out of 10000 (max. 10000000)
 
